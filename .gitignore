@@ -1,0 +1,15 @@
+.autoenv
+.env
+.git
+.idea
+**/*.ipynb*
+**/*.pyc
+**/__pycache__
+local.py
+.coverage
+*.egg-info/
+docs/_build
+.venv/
+venv/
+.DS_Store
+src/.DS_Store
