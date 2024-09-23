@@ -1,3 +1,4 @@
+import json
 from typing import Optional
 from .cache_keys import get_default_request_cache_key
 
@@ -48,7 +49,10 @@ class Response:
     ):
         self.status_code = status_code
         self.text = text
-        self.headers = headers
+        if headers is None:
+            self.headers = {}
+        else:
+            self.headers = {k.lower(): v for k, v in headers.items()}
         self.original_request = original_request
 
     @property
@@ -56,4 +60,12 @@ class Response:
         return self.status_code < 400
 
     def json(self):
-        raise RuntimeError
+        if not self.is_json:
+            raise ValueError('Cannot decode JSON content for non-JSON response')
+        return json.loads(self.text)
+
+    @property
+    def is_json(self) -> bool:
+        if ct := self.headers.get('content-type'):
+            return ct.lower() == 'application/json'
+        return False

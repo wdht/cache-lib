@@ -1,15 +1,15 @@
 from typing import Optional
-from . import config
+from .config import config
 from .cache_redis import BaseCache, RedisCache
-from .models import Request, Response
+from .models import Response
 
 
 def get_backend() -> BaseCache:
-    if config.CACHE_BACKEND == 'redis':
+    if config.backend == 'redis':
         return RedisCache(
-            config.CACHE_REDIS_URL,
-            config.CACHE_DEFAULT_TIMEOUT,
-            config.CACHE_KEY_PREFIX,
+            config.redis_url,
+            config.cache_timeout,
+            config.cache_prefix,
         )
 
 
