@@ -33,6 +33,8 @@ class AiohttpTransport:
         return await session.request(
             request.method,
             request.url,
+            data=request.data,
+            json=request.json,
             params=request.params,
             headers=request.headers,
             files=request.files,

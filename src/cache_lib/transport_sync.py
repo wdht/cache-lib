@@ -13,6 +13,8 @@ class RequestsTransport:
         response = self.requests.request(
             request.method,
             request.url,
+            data=request.data,
+            json=request.json,
             params=request.params,
             headers=request.headers,
             files=request.files,

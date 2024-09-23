@@ -1,4 +1,4 @@
-import json
+import json as _json
 from typing import Optional
 from .cache_keys import get_default_request_cache_key
 
@@ -12,6 +12,7 @@ class Request:
         url: str,
         params: Optional[dict] = None,
         data=None,
+        json=None,
         headers: Optional[dict] = None,
         content: Optional[str] = None,
         files=None,
@@ -20,6 +21,7 @@ class Request:
         self.method = method.lower()
         self.url = url
         self.data = data
+        self.json = json
         self.params = params
         self.headers = headers
         self.content = content
@@ -62,7 +64,7 @@ class Response:
     def json(self):
         if not self.is_json:
             raise ValueError('Cannot decode JSON content for non-JSON response')
-        return json.loads(self.text)
+        return _json.loads(self.text)
 
     @property
     def is_json(self) -> bool:
