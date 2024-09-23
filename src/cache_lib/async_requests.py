@@ -44,6 +44,18 @@ class AsyncRequests:
             self.cache.store_response(key, response, cache_timeout)
         return response
 
+    async def get(self, *args, **kwargs) -> Response:
+        return await self.request('get', *args, **kwargs)
+
+    async def post(self, *args, **kwargs) -> Response:
+        return await self.request('post', *args, **kwargs)
+
+    async def put(self, *args, **kwargs) -> Response:
+        return await self.request('put', *args, **kwargs)
+
+    async def delete(self, *args, **kwargs) -> Response:
+        return await self.request('delete', *args, **kwargs)
+
 
 async def request(
     method_or_request: Union[str, Request],

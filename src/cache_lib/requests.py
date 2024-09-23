@@ -44,6 +44,18 @@ class Requests:
             self.cache.store_response(key, response, cache_timeout)
         return response
 
+    def get(self, *args, **kwargs) -> Response:
+        return self.request('get', *args, **kwargs)
+
+    def post(self, *args, **kwargs) -> Response:
+        return self.request('post', *args, **kwargs)
+
+    def put(self, *args, **kwargs) -> Response:
+        return self.request('put', *args, **kwargs)
+
+    def delete(self, *args, **kwargs) -> Response:
+        return self.request('delete', *args, **kwargs)
+
 
 def request(
     method_or_request: Union[str, Request],
